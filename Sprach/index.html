@@ -6,8 +6,8 @@
       * { margin: 0; padding: 0; box-sizing: border-box; }
       body { font: 13px Helvetica, Arial; background: #cecece; }
       form { background: #949696; padding: 5.8px; position: fixed; bottom: 0; width: 100%; border-radius: 0px; }
-      form input { border: 0; padding: 10px; width: 90%; margin-right: .7%; }
-      form button { width: 9%; background: rgb(44, 146, 204); border-radius: 12px; padding: 10px;}
+      form input { border: 0; padding: 10px; width: 90%; margin-right: .7%;}
+      form button { width: 9%; background: rgb(44, 146, 204); border-radius: 12px; padding: 10px; }
       #messages { list-style-type: none; margin: 0; padding: 0; background: none; }
       #messages li { padding: 5px 10px; }
       #messages li:nth-child(odd) { background: #f2f2f2; }
@@ -20,6 +20,8 @@
   $(function () {
     var socket = io();
     $('form').submit(function(){
+	  socket.emit('username', $('#u').val());
+	  $('#u').prop('disabled', true);
       socket.emit('chat message', $('#m').val());
       $('#m').val('');
       return false;
@@ -27,11 +29,14 @@
     socket.on('chat message', function(msg){
       $('#messages').append($('<li>').text(msg));
     });
+	socket.on('username', function(use){
+      $('#messages').append($('<li>').text(use));
+    });
   });
 </script>
     <ul id="messages"></ul>
     <form action="">
-      <input id="m" autocomplete="off" /><button>Send</button>
+      <input id="u" autocomplete="off" onchange="ip()" /><input id="m" autocomplete="off" /><button>Send</button>
     </form>
   </body>
 </html>
