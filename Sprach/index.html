@@ -17,26 +17,30 @@
 <script src="/socket.io/socket.io.js"></script>
 <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
 <script>
-  $(function () {
+  
+  $(function () { //Start of function
     var socket = io();
-    $('form').submit(function(){
-	  socket.emit('username', $('#u').val());
-	  $('#u').prop('disabled', true);
-      socket.emit('chat message', $('#m').val());
-      $('#m').val('');
+    $('form').submit(function(){ //Submit form
+	  socket.emit('username', $('#u').val()); //Send username
+	  $('#u').prop('disabled', true); //Disables editing of username
+      socket.emit('chat message', $('#m').val()); //Send chat message
+      $('#m').val(''); //Erases message from chat box after sending
       return false;
     });
-    socket.on('chat message', function(msg){
-      $('#messages').append($('<li>').text(msg));
+    socket.on('chat message', function(msg){ 
+      $('#messages').append($('<li>').text(msg)); //Displays chat message 
     });
 	socket.on('username', function(use){
-      $('#messages').append($('<li>').text(use));
+      $('#messages').append($('<li>').text(use)); //Displays username
     });
-  });
+  }); //End of function
+
 </script>
     <ul id="messages"></ul>
     <form action="">
-      <input id="u" autocomplete="off" onchange="ip()" /><input id="m" autocomplete="off" /><button>Send</button>
+      <input id="u" autocomplete="off" onchange="ip()" maxlength="100" />
+      <input id="m" autocomplete="off" maxlength="100000" />
+      <button>Send</button>
     </form>
   </body>
 </html>
