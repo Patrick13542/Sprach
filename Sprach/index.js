@@ -62,3 +62,15 @@ io.on('connection', function(socket){
     io.emit('username', use);
   });
 });
+
+io.on('connection', function(socket){
+  socket.on('picture', function(pic){
+    console.log('Image: ' + pic);
+  });
+});
+
+io.on('connection', function(socket){
+  socket.on('picture', function(pic){
+    io.emit('picture', pic);
+  });
+});
