@@ -34,7 +34,7 @@
     <ul id="messages"></ul>
     <img id="image" src="">
         <form action="">
-          <input id="u" autocomplete="off" maxlength="100" placeholder="Username" required /><button class="khonka">Send</button>
+          <input id="u" autocomplete="off" maxlength="100" placeholder="Username" required /><button class="khonka" id="btnSub">Send</button>
           <input id="m" autocomplete="off" maxlength="100000" /><input align="right" type="file" id="imgsub" class="khonka" class="inputfile" onchange="fileAsURL(this)" /> 
           <input id="i" /><input id="zyx" />
 </form>
@@ -55,12 +55,27 @@
 }
   var nameusers = [];
   var un = 0;
+  var spiel = 0;
   $('#i').hide(); //Hides Image URL diplay feature.
   $('#zyx').hide();
   $('#usernames').hide();
   $(function () {
     var socket = io();
     $('form').submit(function(){
+    	        	console.log(spiel);
+      setTimeout(function(){ 
+        if (spiel > 0) {
+        	spiel -= 1;
+        } 
+  	  }, 5000); 
+      spiel += 1; 
+      if (spiel > 5) {
+      	$('#btnSub').prop('disabled', true);
+      	setTimeout(function(){ 
+    	$('#btnSub').prop('disabled', false); 
+  	  }, 5000);
+      };
+              	console.log(spiel); 
       socket.emit('username', $('#u').val()); //Send username
     $('#u').prop('disabled', true); //Disables editing of username.
       socket.emit('chat message', $('#m').val());
