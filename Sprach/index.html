@@ -9,12 +9,15 @@
     body { font: 13px Helvetica, Arial; background: #cecece; }
     form { background: #949696; padding: 5.8px; position: fixed; bottom: 0; width: 90%; border-radius: 0px; }
     form input { border: 0; padding: 10px; width: 90%; margin-right: .7%; }
-    .khonka { width: 120px; background: rgb(44, 146, 204); border-radius: 12px; padding: 10px;}
+    .khonka { border: none; width: 7vw; background-color: royalblue; border-radius: 10px; padding: 10px; cursor: pointer;}
     #messages li { padding: 5px 10px; }
     #messages li:nth-child(odd) { background: #f2f2f2; }
-    #title { background-color:royalblue; height:100px;}
+    #title { background-color:royalblue; height:10vh;}
     .logo { font-family: brush script std;}
-    #sidebar {background-color:#949696; height:100vh; width:10%; float: left;}
+    #sidebar {background-color:#949696; height:90vh; width:10vw; float: left;}
+    #uses { width: 10vw; }
+    #imgsub { opacity: 0; position: absolute; z-index: -1; }
+    hr { color: #949696; height: 6px; border: none;}
 </style>
   </head>
 <body>
@@ -22,44 +25,48 @@
 <script src="/socket.io/socket.io.js"></script>
 <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
 <!--Website Layout-->
+<div id="title"><br><br><pre class="logo" style="font-size: 300%;">   Sprach!</pre></div>
 <div id="sidebar">
 	<br>
-	<button class="khonka" onclick="useshow();"><p> Users: <p id="num"></p></p></button>
+	<button id="uses" ><p>Users:<p id="num"></p></p></button>
 	<br>
 	<ul id="usernames"></ul>
 </div>
-<div id="title"><br><br><pre class="logo" style="font-size: 300%;">   Sprach!</pre></div>
-<div style="overflow: scroll; height: 82vh;"> <!--Important hypertext website layout formater displing devise elements and integrated styles.-->
+<div style="overflow: scroll; height: 83vh;"> <!--Important hypertext website layout formater displing devise elements and integrated styles.-->
 	<!--Adaptive server side Table-->
     <ul id="messages"></ul>
     <img id="image" src="">
         <form action="">
-          <input id="u" autocomplete="off" maxlength="100" placeholder="Username" required /><button class="khonka" id="btnSub">Send</button>
-          <input id="m" autocomplete="off" maxlength="100000" /><input align="right" type="file" id="imgsub" class="khonka" class="inputfile" onchange="fileAsURL(this)" /> 
+          <input id="u" autocomplete="off" maxlength="100" placeholder="Username" required /><button class="khonka" id="btnSub">&#160 &#160 &#160 &#160 &#160 &#160 Send &#160 &#160 &#160 &#160 &#160</button>
+          <hr>
+          <input id="m" autocomplete="off" maxlength="100000" /><label class="khonka" for="imgsub">&#160 &#160 &#160 &#160 Browse... &#160 &#160 &#160 &#160</label><input align="right" type="file" id="imgsub" class="inputfile" onchange="fileAsURL(this)" /> 
           <input id="i" /><input id="zyx" />
 </form>
 </div>
 </body>
 </html>
 <script>
-	function useshow() {
-    $('#usernames').toggle('slow');
-    };
+	//Variables
+	var nameusers = [];
+    var un = 0;
+    var spiel = 0;
+    //Hides Image URL and other storing features.
+    $('#i').hide();
+    $('#zyx').hide();
+    $('#usernames').hide();
+    //User Click
+	$("#uses").click(function(){$('#usernames').toggle('slow');});
+	//URL Converter
 	function fileAsURL(element) {
-  var file = element.files[0];
-  var reader = new FileReader();
-  reader.onloadend = function() {
-  document.getElementById('i').value = reader.result;
-  }
-  reader.readAsDataURL(file);
-}
-  var nameusers = [];
-  var un = 0;
-  var spiel = 0;
-  $('#i').hide(); //Hides Image URL diplay feature.
-  $('#zyx').hide();
-  $('#usernames').hide();
-  $(function () {
+  		var file = element.files[0];
+  		var reader = new FileReader();
+  		reader.onloadend = function() {
+  			document.getElementById('i').value = reader.result;
+  		}
+  		reader.readAsDataURL(file);
+	}
+
+    $(function () {
     var socket = io();
     $('form').submit(function(){
     	        	console.log(spiel);

@@ -38,7 +38,8 @@
             this.sprachip.MaximumSize = new System.Drawing.Size(1000000, 1000000);
             this.sprachip.MinimumSize = new System.Drawing.Size(20, 20);
             this.sprachip.Name = "sprachip";
-            this.sprachip.Size = new System.Drawing.Size(464, 256);
+            this.sprachip.ScriptErrorsSuppressed = true;
+            this.sprachip.Size = new System.Drawing.Size(868, 536);
             this.sprachip.TabIndex = 0;
             this.sprachip.Url = new System.Uri("http://10.193.66.127:3000/?", System.UriKind.Absolute);
             // 
@@ -46,7 +47,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(464, 256);
+            this.ClientSize = new System.Drawing.Size(868, 536);
             this.Controls.Add(this.sprachip);
             this.Name = "Form1";
             this.Text = "Sprach!";
