@@ -11,6 +11,8 @@
         body {
         	margin: 0;
         	}
+        	#messages tr { padding: 5px 10px; color: silver; font-size: 200%;}
+    		#messages tr:nth-child(even) { font-size: 200%; color: black; border-left: 6px solid red; background-color: lightgrey;}
         	.container{
         	width: 100%;
         	display: flex;
@@ -44,7 +46,7 @@
             <div class="col-xs-12" style="overflow: scroll; height: 90vh;">
                 <!--Important hypertext website layout formater displing devise elements and integrated styles.-->
                 <!--Adaptive server side Table-->
-                <table class="table table-striped" id="messages">
+                <table id="messages" id="messages" style="width: 100vw;">
                 </table>
             </div>
             <img id="image" src="">
@@ -110,7 +112,7 @@
               $('#messages').append($('<tr>').text(msg)); //Displays message.
             });
         	socket.on('picture', function(pic){
-        	  $('#messages').append($('<img>').attr("src", pic)); //Displays picture.
+        	  $('#messages').append($('<tr>').append($('<img>').attr("src", pic))); //Displays picture.
         	  $('#messages').append($('<tr>').text(""));
         	});
           socket.on('username', function(use){
